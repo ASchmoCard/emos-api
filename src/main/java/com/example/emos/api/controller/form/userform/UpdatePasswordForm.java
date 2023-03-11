@@ -1,4 +1,4 @@
-package com.example.emos.api.controller.form;
+package com.example.emos.api.controller.form.userform;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -19,5 +19,10 @@ public class UpdatePasswordForm {
     @Pattern(regexp = "^[a-zA-Z0-9]{6,20}$",message = "password内容不正确")
     @Schema(description = "密码")
     String password;
+
+    @NotBlank(message = "newPassword不能为空")
+    @Pattern(regexp = "^[a-zA-Z0-9]{6,20}$",message = "newPassword格式错误")
+    @Schema(description = "密码")
+    private String newPassword;
 }
 

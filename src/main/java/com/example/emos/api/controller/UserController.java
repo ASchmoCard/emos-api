@@ -9,6 +9,8 @@ import cn.hutool.json.JSONUtil;
 import com.example.emos.api.common.util.PageUtils;
 import com.example.emos.api.common.util.R;
 import com.example.emos.api.controller.form.*;
+import com.example.emos.api.controller.form.userform.UpdatePasswordForm;
+import com.example.emos.api.controller.form.userform.UpdateUserForm;
 import com.example.emos.api.db.pojo.TbUser;
 import com.example.emos.api.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -125,10 +127,12 @@ public class UserController {
     @SaCheckLogin
     @Operation(summary = "修改密码")
     public R updatePassword(@Valid @RequestBody UpdatePasswordForm form){
+        // 通过userId 生成的 token，在将其转换回来
         int userId = StpUtil.getLoginIdAsInt();
         HashMap param = new HashMap();
         param.put("userId",userId);
         param.put("password",form.getPassword());
+        param.put("newPassword",form.getNewPassword());
         // 受影响的行数
         int rows = userService.updatePassword(param);
         return R.ok().put("rows",rows);

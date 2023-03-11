@@ -76,8 +76,9 @@
     </select>
     <update id="updatePassword" parameterType="HashMap">
         UPDATE tb_user
-        SET password = HEX(AES_ENCRYPT(#{password}, username))
+        SET password = HEX(AES_ENCRYPT(#{newPassword}, username))
         WHERE id = #{userId}
+        and password = HEX(AES_ENCRYPT(#{password}, username))
     </update>
 
     <select id="searchUserByPage" parameterType="HashMap" resultType="HashMap">
